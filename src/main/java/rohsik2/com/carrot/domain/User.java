@@ -1,5 +1,7 @@
 package rohsik2.com.carrot.domain;
 
+import rohsik2.com.carrot.controller.UserForm;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,16 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.stuffs = new ArrayList<>();
     }
+
+    public User(UserForm userForm){
+        email = userForm.getEmail();
+        pw = userForm.getPw();
+        name = userForm.getName();
+        nickname = userForm.getNickname();
+        phoneNumber = userForm.getPhoneNumber();
+        stuffs = new ArrayList<>();
+    }
+
 
     public long getUserNo() {
         return userNo;

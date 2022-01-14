@@ -33,11 +33,12 @@ public class UserController {
     @PostMapping("/user/new")
     public String create(UserForm form){
         System.out.println("new member post method get");
-        User user = new User(form.getEmail(), form.getPw(),
-                form.getName(), form.getPhoneNumber(), form.getNickname());
+        User user = new User(form);
         if(form.is_valid()){
             userRepository.save(user);
         }
+        else
+            return "/user/new";
         return "redirect:/user/userList";
     }
 
