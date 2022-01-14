@@ -1,24 +1,28 @@
 package rohsik2.com.carrot.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
     private long userNo;
-    private String id;
+    private String email;
     private String pw;
-    private String nickname;
+    private String name;
     private String phoneNumber;
+    private String nickname;
     private List<Stuff> stuffs;
 
     public User(){
-        id = "";
+        email = "";
     }
 
-    public User(String id, String pw, String nickname, String phoneNumber){
-        this.id = id;
+    public User(String email, String pw, String name, String phoneNumber, String nickname){
+        this.email = email;
         this.pw = pw;
+        this.name = name;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
+        this.stuffs = new ArrayList<>();
     }
 
     public long getUserNo() {
@@ -29,12 +33,12 @@ public class User {
         this.userNo = userNo;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPw() {
@@ -67,5 +71,13 @@ public class User {
 
     public void setStuffs(List<Stuff> stuffs) {
         this.stuffs = stuffs;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
