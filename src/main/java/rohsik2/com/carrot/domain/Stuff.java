@@ -9,6 +9,8 @@ public class Stuff {
     private String text;
     private int isDone;
     private int numLike;
+
+    private String category;
     private List<User> likeUsers;
     private User owner;
 
@@ -19,12 +21,13 @@ public class Stuff {
         numLike = 0;
         likeUsers = new ArrayList<>();
     }
-    public Stuff(String title, String text, int isDone, int numLike) {
+    public Stuff(String title, String text, int isDone, int numLike, String category) {
         this.title = title;
         this.text = text;
         this.isDone = isDone;
         this.numLike = numLike;
         this.likeUsers = new ArrayList<>();
+        this.category = category;
 
     }
 
@@ -83,4 +86,14 @@ public class Stuff {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
