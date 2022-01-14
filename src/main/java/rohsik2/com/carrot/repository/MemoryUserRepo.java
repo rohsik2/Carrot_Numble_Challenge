@@ -1,9 +1,11 @@
 package rohsik2.com.carrot.repository;
 
+import org.springframework.stereotype.Repository;
 import rohsik2.com.carrot.domain.User;
 
 import java.util.*;
 
+@Repository
 public class MemoryUserRepo implements UserRepository{
 
     private static final Map<Long, User> users = new HashMap<>();
@@ -11,9 +13,24 @@ public class MemoryUserRepo implements UserRepository{
 
     @Override
     public User save(User user) {
-        user.setUserNo(++seqNo);
+        if(!isDuplicate(user))
+            user.setUserNo(++seqNo);
+        else
+            throw new IllegalStateException("User Already Exist");
         users.put(user.getUserNo(), user);
         return user;
+    }
+
+    @Override
+    public boolean isDuplicate(User user){
+        return !(
+                findByEmail(user.getEmail()).isEmpty() &&
+                findByNickname(user.getNickname()).isEmpty() &&
+                users.values().stream()
+                        .filter(curUser -> curUser.getPhoneNumber()
+                        .equals(user.getPhoneNumber())).findAny()
+                        .isEmpty()
+                );
     }
 
     @Override
@@ -30,7 +47,14 @@ public class MemoryUserRepo implements UserRepository{
 
     @Override
     public List<User> findAll() {
-        return new ArrayList<User>(users.values());
+        return new ArrayList<>(users.values());
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email){
+        return users.values().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findAny();
     }
 
     public void clear(){
