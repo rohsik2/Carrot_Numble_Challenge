@@ -1,5 +1,6 @@
 package rohsik2.com.carrot.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 
+@Controller
 public class StuffController {
     StuffRepository stuffRepository;
 
@@ -35,6 +37,7 @@ public class StuffController {
 
     @GetMapping("/stuff/stuffList")
     public String stuffList(Model model){
+        model.addAttribute("stuffs", stuffRepository.findByTitle(""));
         return "/stuff/stuffList";
     }
 

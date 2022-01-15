@@ -13,12 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryUserRepoTest {
 
-    @Autowired
-    public MemoryUserRepoTest(MemoryUserRepo memoryUserRepo) {
-        this.memoryUserRepo = memoryUserRepo;
-    }
-
-    MemoryUserRepo memoryUserRepo;
+    MemoryUserRepo memoryUserRepo  = new MemoryUserRepo();
 
 
     @AfterEach

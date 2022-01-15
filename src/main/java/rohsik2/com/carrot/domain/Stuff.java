@@ -2,35 +2,37 @@ package rohsik2.com.carrot.domain;
 
 import rohsik2.com.carrot.controller.StuffForm;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Stuff {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stuffId;
     private String title;
     private String text;
     private int isDone;
     private int numLike;
-
     private int price;
-
     private String category;
-    private List<User> likeUsers;
-    private User owner;
 
     public Stuff(){
         title = "";
         text = "";
         isDone = 0;
         numLike = 0;
-        likeUsers = new ArrayList<>();
     }
+
     public Stuff(String title, String text, int isDone, int numLike, String category, int price) {
         this.title = title;
         this.text = text;
         this.isDone = isDone;
         this.numLike = numLike;
-        this.likeUsers = new ArrayList<>();
         this.category = category;
         this.price = price;
 
@@ -41,7 +43,6 @@ public class Stuff {
         this.text = stuffForm.getText();
         this.isDone = 0;
         this.numLike = 0;
-        this.likeUsers = new ArrayList<>();
         this.category = stuffForm.getCategory();
         this.price = stuffForm.getPrice();
     }
@@ -84,22 +85,6 @@ public class Stuff {
 
     public void setNumLike(int numLike) {
         this.numLike = numLike;
-    }
-
-    public List<User> getLikeUsers() {
-        return likeUsers;
-    }
-
-    public void setLikeUsers(List<User> likeUsers) {
-        this.likeUsers = likeUsers;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
 

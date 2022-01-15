@@ -12,7 +12,6 @@ public class User {
     private String name;
     private String phoneNumber;
     private String nickname;
-    private List<Stuff> stuffs;
 
     public User(){
         email = "";
@@ -24,7 +23,6 @@ public class User {
         this.name = name;
         this.nickname = nickname;
         this.phoneNumber = phoneNumber;
-        this.stuffs = new ArrayList<>();
     }
 
     public User(UserForm userForm){
@@ -33,7 +31,6 @@ public class User {
         name = userForm.getName();
         nickname = userForm.getNickname();
         phoneNumber = userForm.getPhoneNumber();
-        stuffs = new ArrayList<>();
     }
 
 
@@ -75,14 +72,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public List<Stuff> getStuffs() {
-        return stuffs;
-    }
-
-    public void setStuffs(List<Stuff> stuffs) {
-        this.stuffs = stuffs;
     }
 
     public String getName() {
