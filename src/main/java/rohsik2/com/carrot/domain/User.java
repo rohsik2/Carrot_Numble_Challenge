@@ -2,9 +2,6 @@ package rohsik2.com.carrot.domain;
 
 import rohsik2.com.carrot.controller.UserForm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
     private long userNo;
     private String email;

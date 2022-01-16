@@ -2,8 +2,11 @@ package rohsik2.com.carrot;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import rohsik2.com.carrot.repository.JpaStuffRepo;
 import rohsik2.com.carrot.repository.JpaUserRepo;
+import rohsik2.com.carrot.repository.StuffRepository;
 import rohsik2.com.carrot.repository.UserRepository;
+import rohsik2.com.carrot.service.StuffService;
 import rohsik2.com.carrot.service.UserService;
 
 import javax.persistence.EntityManager;
@@ -18,6 +21,17 @@ public class SpringConfig {
         this.dataSource = dataSource;
     }
 
+
+    @Bean
+    public StuffService stuffService(){
+        return new StuffService(stuffRepository());
+    }
+
+    @Bean
+    public StuffRepository stuffRepository() {
+        return new JpaStuffRepo(em);
+    }
+
     @Bean
     public UserService userService(){
         return new UserService(userRepository());
@@ -25,6 +39,6 @@ public class SpringConfig {
 
     @Bean
     public UserRepository userRepository(){
-        return new JpaUserRepo();
+        return new JpaUserRepo(em);
     }
 }

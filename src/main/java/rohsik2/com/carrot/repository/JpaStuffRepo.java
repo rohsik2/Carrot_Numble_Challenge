@@ -22,7 +22,15 @@ public class JpaStuffRepo implements StuffRepository{
 
     @Override
     public void delete(Stuff stuff) {
-        ;
+        em.createQuery("delete s from Stuff s where s.stuffId =:stuffId", Stuff.class)
+                .setParameter("stuffId", stuff.getStuffId());
+    }
+
+    @Override
+    public List<Stuff> findByUserId(long userId){
+        return em.createQuery("select s from Stuff s where s.ownerId = :owenerId", Stuff.class)
+                .setParameter("ownerId", userId)
+                .getResultList();
     }
 
     @Override

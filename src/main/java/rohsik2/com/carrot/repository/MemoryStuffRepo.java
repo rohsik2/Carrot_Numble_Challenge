@@ -52,6 +52,15 @@ public class MemoryStuffRepo implements StuffRepository {
                 .findAny();
     }
 
+    @Override
+    public List<Stuff> findByUserId(long ownerId){
+        return new ArrayList<Stuff>(
+                stuffs.values().stream()
+                        .filter(stuff -> stuff.getOwnerId() == ownerId)
+                        .collect(Collectors.<Stuff>toList())
+                );
+    }
+
     public void clear(){
         stuffs.clear();
     }

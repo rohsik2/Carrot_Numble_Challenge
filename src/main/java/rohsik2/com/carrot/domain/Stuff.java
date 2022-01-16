@@ -20,6 +20,7 @@ public class Stuff {
     private int numLike;
     private int price;
     private String category;
+    private long ownerId;
 
     public Stuff(){
         title = "";
@@ -104,6 +105,15 @@ public class Stuff {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
 
 
 }
