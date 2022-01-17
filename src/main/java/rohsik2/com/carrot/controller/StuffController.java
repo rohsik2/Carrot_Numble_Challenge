@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
+import rohsik2.com.carrot.repository.JpaStuffRepo;
 import rohsik2.com.carrot.repository.MemoryStuffRepo;
 import rohsik2.com.carrot.repository.StuffRepository;
+import rohsik2.com.carrot.service.StuffService;
 
 import java.lang.reflect.Member;
 import java.util.List;
@@ -17,8 +19,9 @@ import java.util.Optional;
 @Controller
 public class StuffController {
     StuffRepository stuffRepository;
+    StuffService stuffService;
 
-    public StuffController(MemoryStuffRepo stuffRepository) {
+    public StuffController(StuffRepository stuffRepository) {
         this.stuffRepository = stuffRepository;
     }
 
@@ -31,7 +34,7 @@ public class StuffController {
     public String stuffRegister(StuffForm form){
         //TODO : Get user data from form(?)
         Stuff stuff = new Stuff(form);
-        stuffRepository.register(stuff, new User());
+        stuffService.save(stuff, new User());
         return "redirect:/stuff/stuffList";
     }
 

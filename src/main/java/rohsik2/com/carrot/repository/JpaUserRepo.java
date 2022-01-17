@@ -1,11 +1,14 @@
 package rohsik2.com.carrot.repository;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class JpaUserRepo implements UserRepository{
     EntityManager em;
     public JpaUserRepo(EntityManager em){
@@ -19,37 +22,36 @@ public class JpaUserRepo implements UserRepository{
     }
 
     @Override
+    public void delete(User user){
+        em.remove(user);
+    }
+
+    @Override
     public boolean isDuplicate(User user) {
-        if(findByUserNo(user.getUserNo()).isEmpty()
-            && findByEmail(user.getEmail()).isEmpty()
-            && findByNickname(user.getNickname()).isEmpty()
-        )
-            return false;
-        return true;
+        return findByUserNo(user.getUserNo()).isPresent()
+                || findByEmail(user.getEmail()).isPresent()
+                || findByNickname(user.getNickname()).isPresent();
     }
 
     @Override
     public Optional<User> findByUserNo(long id) {
         return Optional.ofNullable(em.find(User.class, id));
-
     }
 
     @Override
     public Optional<User> findByNickname(String nickname) {
-        return Optional.ofNullable(
-                em.createQuery("select u from User u where user.nickname = :nickname", User.class)
-                        .setParameter("nickname", nickname)
-                        .getSingleResult()
-        );
+        List<User> userList = em.createQuery("select u from User u where u.nickname like :nickname", User.class)
+                .setParameter("nickname", nickname)
+                .getResultList();
+        return userList.stream().findAny();
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.ofNullable(
-                em.createQuery("select u from User u where user.email = :email", User.class)
-                        .setParameter("nickname", email)
-                        .getSingleResult()
-        );
+        List<User> userList = em.createQuery("select u from User u where u.email like :email", User.class)
+                .setParameter("email", email)
+                .getResultList();
+        return userList.stream().findAny();
     }
 
     @Override

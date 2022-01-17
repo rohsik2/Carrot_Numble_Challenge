@@ -7,6 +7,7 @@ import rohsik2.com.carrot.domain.User;
 import rohsik2.com.carrot.repository.JpaStuffRepo;
 import rohsik2.com.carrot.repository.StuffRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -32,6 +33,20 @@ public class StuffService {
         stuffRepository.register(stuff, user);
     }
 
+    List<Stuff> findByUserId(long userId){
+        return stuffRepository.findByUserId(userId);
+    }
 
+    List<Stuff> findByCategory(String category){
+        return stuffRepository.findByCategory(category);
+    }
+
+    List<Stuff> findByTitle(String title){
+        return stuffRepository.findByTitle(title);
+    }
+
+    Optional<Stuff> findByStuffId(long stuffId){
+        return stuffRepository.findByStuffId(stuffId);
+    }
 
 }

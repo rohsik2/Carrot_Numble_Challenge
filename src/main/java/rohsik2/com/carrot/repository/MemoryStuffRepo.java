@@ -7,7 +7,6 @@ import rohsik2.com.carrot.domain.User;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository
 public class MemoryStuffRepo implements StuffRepository {
 
     private static final Map<Long, Stuff> stuffs = new HashMap<>();
@@ -56,7 +55,7 @@ public class MemoryStuffRepo implements StuffRepository {
     public List<Stuff> findByUserId(long ownerId){
         return new ArrayList<Stuff>(
                 stuffs.values().stream()
-                        .filter(stuff -> stuff.getOwnerId() == ownerId)
+                        .filter(stuff -> stuff.getOwner().getUserNo() == ownerId)
                         .collect(Collectors.<Stuff>toList())
                 );
     }

@@ -2,14 +2,13 @@ package rohsik2.com.carrot.domain;
 
 import rohsik2.com.carrot.controller.StuffForm;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Entity
+@Entity @Table(name = "stuff")
 public class Stuff {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +19,12 @@ public class Stuff {
     private int numLike;
     private int price;
     private String category;
-    private long ownerId;
+
+    @ManyToOne @JoinColumn(name = "user")
+    private User owner;
+
+    @OneToMany(mappedBy = "stuff")
+    private Set<Comment> comments = new HashSet<>();
 
     public Stuff(){
         title = "";
@@ -106,14 +110,19 @@ public class Stuff {
         this.price = price;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(long ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
+    public Set<Comment> getComments() {
+        return comments;
+    }
 
-
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 }

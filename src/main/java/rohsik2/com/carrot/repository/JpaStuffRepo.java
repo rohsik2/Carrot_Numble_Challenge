@@ -1,5 +1,7 @@
 package rohsik2.com.carrot.repository;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
 
@@ -7,6 +9,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class JpaStuffRepo implements StuffRepository{
     private final EntityManager em;
 
@@ -22,14 +25,13 @@ public class JpaStuffRepo implements StuffRepository{
 
     @Override
     public void delete(Stuff stuff) {
-        em.createQuery("delete s from Stuff s where s.stuffId =:stuffId", Stuff.class)
-                .setParameter("stuffId", stuff.getStuffId());
+        em.remove(stuff);
     }
 
     @Override
     public List<Stuff> findByUserId(long userId){
-        return em.createQuery("select s from Stuff s where s.ownerId = :owenerId", Stuff.class)
-                .setParameter("ownerId", userId)
+        return em.createQuery("select s from Stuff s where s.owner.userNo = :userId", Stuff.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 

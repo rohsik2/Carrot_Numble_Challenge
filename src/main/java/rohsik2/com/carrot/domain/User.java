@@ -2,13 +2,23 @@ package rohsik2.com.carrot.domain;
 
 import rohsik2.com.carrot.controller.UserForm;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity @Table(name = "user")
 public class User {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userNo;
     private String email;
     private String pw;
     private String name;
     private String phoneNumber;
     private String nickname;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Stuff> stuffSet = new HashSet<>();
 
     public User(){
         email = "";
@@ -23,11 +33,11 @@ public class User {
     }
 
     public User(UserForm userForm){
-        email = userForm.getEmail();
-        pw = userForm.getPw();
-        name = userForm.getName();
-        nickname = userForm.getNickname();
-        phoneNumber = userForm.getPhoneNumber();
+        this.email = userForm.getEmail();
+        this.pw = userForm.getPw();
+        this.name = userForm.getName();
+        this.nickname = userForm.getNickname();
+        this.phoneNumber = userForm.getPhoneNumber();
     }
 
 
@@ -77,5 +87,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Stuff> getStuffSet() {
+        return stuffSet;
+    }
+
+    public void setStuffSet(Set<Stuff> stuffSet) {
+        this.stuffSet = stuffSet;
     }
 }

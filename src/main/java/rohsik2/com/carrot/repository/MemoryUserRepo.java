@@ -5,7 +5,6 @@ import rohsik2.com.carrot.domain.User;
 
 import java.util.*;
 
-@Repository
 public class MemoryUserRepo implements UserRepository{
 
     private static final Map<Long, User> users = new HashMap<>();
@@ -19,6 +18,11 @@ public class MemoryUserRepo implements UserRepository{
             throw new IllegalStateException("User Already Exist");
         users.put(user.getUserNo(), user);
         return user;
+    }
+
+    @Override
+    public void delete(User user){
+        users.remove(user.getUserNo());
     }
 
     @Override

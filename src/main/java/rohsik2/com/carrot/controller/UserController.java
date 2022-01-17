@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import rohsik2.com.carrot.domain.User;
 import rohsik2.com.carrot.repository.UserRepository;
+import rohsik2.com.carrot.service.UserService;
 
 import java.util.List;
 
 @Controller
 public class UserController {
 
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/user/login")
@@ -35,7 +36,7 @@ public class UserController {
         System.out.println("new member post method get");
         User user = new User(form);
         if(form.is_valid()){
-            userRepository.save(user);
+            userService.join(user);
         }
         else
             return "/user/new";
@@ -49,7 +50,7 @@ public class UserController {
 
     @GetMapping("/user/userList")
     public String userList(Model model){
-        List<User> users = userRepository.findAll();
+        List<User> users = userService.findUsers();
         model.addAttribute("users", users);
         return "/user/userList";
     }

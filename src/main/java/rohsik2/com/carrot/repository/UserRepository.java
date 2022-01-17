@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface UserRepository {
     User save(User user);
+    void delete(User user);
     boolean isDuplicate(User user);
     Optional<User> findByUserNo(long id);
     Optional<User> findByNickname(String nickname);
