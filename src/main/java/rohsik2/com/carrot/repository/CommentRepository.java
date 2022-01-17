@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface CommentRepository {
     Comment register(Comment comment, Stuff stuff);
-    void delete(long commentId);
+    void delete(Comment comment);
     List<Comment> findByUser(User user);
-    List<Comment> findByStuffId(String category);
-    Optional<Stuff> findByCommentId(long commentId);
+    List<Comment> findByStuff(Stuff stuff);
+    Optional<Comment> findByCommentId(long commentId);
 }

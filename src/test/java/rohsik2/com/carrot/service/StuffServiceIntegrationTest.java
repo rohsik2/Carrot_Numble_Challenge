@@ -30,4 +30,28 @@ public class StuffServiceIntegrationTest {
         stuffService.save(myStuff, member);
         assertEquals(stuffService.findByStuffId(myStuff.getStuffId()).get(), myStuff);
     }
+
+    @Test
+    public void 사람으로물건찾기(){
+        User member = new User("name@gmail.com", "password123!!!", "name","01012345678","nickname");
+        Long saveId = userService.join(member);
+        Stuff myStuff1 = new Stuff("Carrot", "It's delicious", 0,0,"Food",1000);
+        stuffService.save(myStuff1, member);
+        Stuff myStuff2 = new Stuff("Carrot", "It's delicious", 0,0,"Food",1000);
+        stuffService.save(myStuff2, member);
+
+        assertEquals(stuffService.findByUserId(member.getUserNo()).size(), 2);
+    }
+
+    @Test
+    public void 물건으로사람찾기(){
+        User member = new User("name@gmail.com", "password123!!!", "name","01012345678","nickname");
+        Long saveId = userService.join(member);
+        Stuff myStuff1 = new Stuff("Carrot", "It's delicious", 0,0,"Food",1000);
+        stuffService.save(myStuff1, member);
+        Stuff myStuff2 = new Stuff("Carrot", "It's delicious", 0,0,"Food",1000);
+        stuffService.save(myStuff2, member);
+
+        assertEquals(stuffService.findByStuffId(myStuff1.getStuffId()).get().getOwner(), member);
+    }
 }

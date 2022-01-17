@@ -41,6 +41,6 @@ public class SpringConfig {
 
     @Bean
     public CommentRepository commentRepository(){
-        return new JpaCommentRepository(em);
+        return new JpaCommentRepo(em);
     }
 }
