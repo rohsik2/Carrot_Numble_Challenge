@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
+import rohsik2.com.carrot.repository.CommentRepository;
 import rohsik2.com.carrot.repository.JpaStuffRepo;
 import rohsik2.com.carrot.repository.StuffRepository;
+import rohsik2.com.carrot.repository.UserRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -14,10 +16,14 @@ import java.util.Optional;
 @Transactional
 public class StuffService {
 
-    private StuffRepository stuffRepository;
-    @Autowired
-    public StuffService(StuffRepository stuffRepository) {
+    private final UserRepository userRepository;
+    private final StuffRepository stuffRepository;
+    private final CommentRepository commentRepository;
+
+    public StuffService(UserRepository userRepository, StuffRepository stuffRepository, CommentRepository commentRepository) {
+        this.userRepository = userRepository;
         this.stuffRepository = stuffRepository;
+        this.commentRepository = commentRepository;
     }
 
     public void delete(long stuffId){

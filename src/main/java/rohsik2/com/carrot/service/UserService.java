@@ -3,6 +3,8 @@ package rohsik2.com.carrot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.User;
+import rohsik2.com.carrot.repository.CommentRepository;
+import rohsik2.com.carrot.repository.StuffRepository;
 import rohsik2.com.carrot.repository.UserRepository;
 
 import java.util.List;
@@ -12,11 +14,15 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final StuffRepository stuffRepository;
+    private final CommentRepository commentRepository;
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, StuffRepository stuffRepository, CommentRepository commentRepository) {
         this.userRepository = userRepository;
+        this.stuffRepository = stuffRepository;
+        this.commentRepository = commentRepository;
     }
+
 
     public Long join(User user){
         validateDuplicateUser(user);//validate existing user
