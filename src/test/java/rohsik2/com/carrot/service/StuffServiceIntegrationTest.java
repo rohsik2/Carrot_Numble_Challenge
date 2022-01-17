@@ -28,6 +28,6 @@ public class StuffServiceIntegrationTest {
         assertEquals(member.getName(), findMember.getName());
         Stuff myStuff = new Stuff("Carrot", "It's delicious", 0,0,"Food",1000);
         stuffService.save(myStuff, member);
-        assertEquals(stuffService.findByStuffId(myStuff.getStuffId()), myStuff);
+        assertEquals(stuffService.findByStuffId(myStuff.getStuffId()).get(), myStuff);
     }
 }

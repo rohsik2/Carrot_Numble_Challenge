@@ -20,11 +20,11 @@ public class Stuff {
     private int price;
     private String category;
 
-    @ManyToOne @JoinColumn(name = "user")
-    private User owner;
-
     @OneToMany(mappedBy = "stuff")
     private Set<Comment> comments = new HashSet<>();
+
+    @ManyToOne @JoinColumn(name = "user_no")
+    private User owner;
 
     public Stuff(){
         title = "";

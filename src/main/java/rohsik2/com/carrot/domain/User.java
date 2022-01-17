@@ -17,9 +17,12 @@ public class User {
     private String phoneNumber;
     private String nickname;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Stuff> stuffSet = new HashSet<>();
+    @OneToMany(mappedBy = "owner")
+    private Set<Stuff> stuffs = new HashSet<>();
 
+
+    @OneToMany(mappedBy = "writer")
+    private Set<Comment> comments = new HashSet<>();
     public User(){
         email = "";
     }
@@ -89,11 +92,11 @@ public class User {
         this.name = name;
     }
 
-    public Set<Stuff> getStuffSet() {
-        return stuffSet;
+    public Set<Stuff> getStuffs() {
+        return stuffs;
     }
 
-    public void setStuffSet(Set<Stuff> stuffSet) {
-        this.stuffSet = stuffSet;
+    public void setStuffs(Set<Stuff> stuffSet) {
+        this.stuffs = stuffSet;
     }
 }

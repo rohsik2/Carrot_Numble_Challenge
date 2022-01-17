@@ -9,11 +9,17 @@ import java.util.Date;
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne @JoinColumn(name = "stuff")
+
+    @ManyToOne @JoinColumn(name = "stuff_comments")
     private Stuff stuff;
+
+    @ManyToOne @JoinColumn(name = "user_comments")
+    private User writer;
     private String text;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date wroteDate;
+
 
     public Comment() {
         ;
