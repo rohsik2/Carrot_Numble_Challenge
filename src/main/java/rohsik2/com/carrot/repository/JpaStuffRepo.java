@@ -8,6 +8,7 @@ import rohsik2.com.carrot.domain.User;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Transactional
 public class JpaStuffRepo implements StuffRepository{
@@ -19,12 +20,15 @@ public class JpaStuffRepo implements StuffRepository{
 
     @Override
     public Stuff register(Stuff stuff, User user) {
+        stuff.setOwner(user);
+        user.getStuffs().add(stuff);
         em.persist(stuff);
         return stuff;
     }
 
     @Override
     public void delete(Stuff stuff) {
+        stuff.getOwner().getStuffs().remove(stuff);
         em.remove(stuff);
     }
 
