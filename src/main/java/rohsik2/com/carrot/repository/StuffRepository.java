@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface StuffRepository {
     Stuff register(Stuff stuff, User user);
+    Stuff update(Stuff stuff);
     void delete(Stuff stuff);
     List<Stuff> findByUserId(long userId);
     List<Stuff> findByCategory(String category);

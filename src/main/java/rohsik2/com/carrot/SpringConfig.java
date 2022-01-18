@@ -14,10 +14,6 @@ public class SpringConfig {
     private final DataSource dataSource;
     private final EntityManager em;
 
-    private UserRepository ur;
-    private StuffRepository sr;
-    private CommentRepository cr;
-
 
     public SpringConfig(DataSource dataSource, EntityManager em){
         this.em = em;
@@ -37,26 +33,17 @@ public class SpringConfig {
 
     @Bean
     public StuffRepository stuffRepository() {
-        if(sr == null) {
-            this.sr = new JpaStuffRepo(em);
-        }
-        return sr;
+        return new JpaStuffRepo(em);
     }
 
 
     @Bean
     public UserRepository userRepository(){
-        if(ur == null) {
-            this.ur = new JpaUserRepo(em);
-        }
-        return ur;
+        return new JpaUserRepo(em);
     }
 
     @Bean
     public CommentRepository commentRepository(){
-        if(cr == null) {
-            this.cr = new JpaCommentRepo(em);
-        }
-        return cr;
+        return new JpaCommentRepo(em);
     }
 }

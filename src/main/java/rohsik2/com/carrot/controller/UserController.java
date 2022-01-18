@@ -1,6 +1,7 @@
 package rohsik2.com.carrot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +16,25 @@ import java.util.List;
 public class UserController {
 
     UserService userService;
+    BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @GetMapping("/user/login")
     public String login(Model model){
         return "/user/login";
+    }
+
+    @PostMapping("/user/login")
+    public String loginResult(LoginForm loginForm){
+        if(userService.isValidUser(loginForm.getEmail(), loginForm.getPw())){
+            return "redirect:/user/profile";
+        }
+        return "asdf";
     }
 
     @GetMapping("/user/new")
@@ -36,6 +47,7 @@ public class UserController {
         System.out.println("new member post method get");
         User user = new User(form);
         if(form.is_valid()){
+            user.setPw(passwordEncoder.encode(form.getPw()));
             userService.join(user);
         }
         else

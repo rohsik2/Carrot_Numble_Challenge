@@ -20,6 +20,11 @@ public class MemoryStuffRepo implements StuffRepository {
     }
 
     @Override
+    public Stuff update(Stuff stuff){
+        return stuff;
+    }
+
+    @Override
     public void delete(Stuff stuff) {
         //TODO : have to make method in User for deleting Stuff for him.
         stuffs.remove(stuff.getStuffId());

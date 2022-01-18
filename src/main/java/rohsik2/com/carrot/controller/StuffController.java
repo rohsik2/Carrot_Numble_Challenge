@@ -27,6 +27,7 @@ public class StuffController {
 
     @GetMapping("/stuff/new")
     public String stuffNew(Model model){
+        model.addAttribute("categories", StuffService.getCategories());
         return "/stuff/new";
     }
 
@@ -40,13 +41,19 @@ public class StuffController {
 
     @GetMapping("/stuff/stuffList")
     public String stuffList(Model model){
-        model.addAttribute("stuffs", stuffRepository.findByTitle(""));
+        model.addAttribute("stuffs", stuffService.findByTitle(""));
+        return "/stuff/stuffList";
+    }
+
+    @GetMapping("/stuff/category")
+    public String categoryView(@RequestParam("category")String category, Model model){
+        model.addAttribute("stuffs", stuffService.findByCategory(category));
         return "/stuff/stuffList";
     }
 
     @GetMapping("/stuff/detail")
     public String detail(@RequestParam("stuffId") long stuffId, Model model){
-        Optional<Stuff> optionalStuff = stuffRepository.findByStuffId(stuffId);
+        Optional<Stuff> optionalStuff = stuffService.findByStuffId(stuffId);
         if(!optionalStuff.isEmpty()) {
             model.addAttribute("stuff", optionalStuff.get());
             return "/stuff/detail";
@@ -55,9 +62,15 @@ public class StuffController {
         return "/stuff/stuffList";
     }
 
+
+    @GetMapping("/stuff/detailTest")
+    public String detail (Model model){
+        return "/stuff/detail";
+    }
+
     @GetMapping("/stuff/search")
     public String detail(@RequestParam("title") String title, Model model){
-        List<Stuff> stuffs = stuffRepository.findByTitle(title);
+        List<Stuff> stuffs = stuffService.findByTitle(title);
         model.addAttribute("stuffs", stuffs);
         return "/stuff/search";
     }

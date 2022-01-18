@@ -60,4 +60,12 @@ public class Comment {
     public void setStuff(Stuff stuff) {
         this.stuff = stuff;
     }
+
+    public User getWriter() {
+        return writer;
+    }
+
+    public void setWriter(User writer) {
+        this.writer = writer;
+    }
 }

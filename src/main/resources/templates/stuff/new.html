@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-
 <head>
 
     <!--Import Google Icon Font-->
@@ -17,33 +15,31 @@
 <body>
     <div class="container">
         <div class="row">
-            <form action="/user/new" method="post">
-                    <div class="form-group">
-                        <div class="input-field col s12">
-                            <input placeholder="abcdefg@karrot.com" id="email" name="email" type="email" class="validate">
-                            <label for="email">이메일(ID)</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="pw" type="password" name="pw" class="validate">
-                            <label for="pw">비밀번호(PW)</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="name" type="text" name="name" class="validate">
-                            <label for="name">이름</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="phoneNo" type="text" name="phoneNumber" class="validate">
-                            <label for="phoneNo">핸드폰번호</label>
-                        </div>
-
-                        <div class="input-field col s12">
-                            <input id="nickname" type="text" name="nickname" class="validate">
-                            <label for="nickname">닉네임</label>
-                        </div>
+            <form action="/stuff/new" method="post">
+                <div class="form-group">
+                    <div class="input-field col s12">
+                        <input placeholder="물건명을 적어주세요" id="title" name="title" type="text" class="validate">
+                        <label for="title">물건명</label>
                     </div>
+
+                    <div class="input-field col s12">
+                        <select name="category" id="category" class="validate" style="display:block">
+                            <option th:each="category : ${categories}"
+                                    th:value="${category}"
+                                    th:utext="${category}"></option>
+                        </select>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="price" type="number" name="price" class="validate">
+                        <label for="price">가격</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input id="text" type="text" name="text" class="validate">
+                        <label for="text">물건 설명란</label>
+                    </div>
+                </div>
                 <button type="submit">submit</button>
             </form>
         </div>

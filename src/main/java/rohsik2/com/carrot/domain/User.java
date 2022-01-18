@@ -2,6 +2,7 @@ package rohsik2.com.carrot.domain;
 
 import rohsik2.com.carrot.controller.UserForm;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class User {
     private String name;
     private String phoneNumber;
     private String nickname;
+    private String role = "ROLE_USER";
 
     @OneToMany(mappedBy = "owner")
     private Set<Stuff> stuffs = new HashSet<>();
@@ -98,5 +100,13 @@ public class User {
 
     public void setStuffs(Set<Stuff> stuffSet) {
         this.stuffs = stuffSet;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }

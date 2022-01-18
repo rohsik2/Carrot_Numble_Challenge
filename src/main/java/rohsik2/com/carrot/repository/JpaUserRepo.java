@@ -20,6 +20,11 @@ public class JpaUserRepo implements UserRepository{
         em.persist(user);
         return user;
     }
+    @Override
+    public User update(User user){
+        em.merge(user);
+        return user;
+    }
 
     @Override
     public void delete(User user){

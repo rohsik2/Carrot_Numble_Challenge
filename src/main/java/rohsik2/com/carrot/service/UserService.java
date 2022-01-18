@@ -7,6 +7,7 @@ import rohsik2.com.carrot.repository.CommentRepository;
 import rohsik2.com.carrot.repository.StuffRepository;
 import rohsik2.com.carrot.repository.UserRepository;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class UserService {
         this.userRepository = userRepository;
         this.stuffRepository = stuffRepository;
         this.commentRepository = commentRepository;
+
     }
 
 
@@ -51,6 +53,25 @@ public class UserService {
 
     public Optional<User> findOne(Long userId){
         return userRepository.findByUserNo(userId);
+    }
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+    public User login(String email, String pw){
+        if(isValidUser(email, pw)){
+            User currentUser = userRepository.findByEmail(email).get();
+            return currentUser;
+        }
+        return null;
+    }
+
+
+    public boolean isValidUser(String email, String pw){
+        if(userRepository.findByEmail(email).isPresent())
+            if(userRepository.findByEmail(email).get().getPw().equals(pw))
+                return true;
+        return false;
     }
 }
 

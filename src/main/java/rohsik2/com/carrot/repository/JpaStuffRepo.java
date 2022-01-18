@@ -23,6 +23,13 @@ public class JpaStuffRepo implements StuffRepository{
         stuff.setOwner(user);
         user.getStuffs().add(stuff);
         em.persist(stuff);
+        em.merge(user);
+        return stuff;
+    }
+
+    @Override
+    public Stuff update(Stuff stuff){
+        em.merge(stuff);
         return stuff;
     }
 

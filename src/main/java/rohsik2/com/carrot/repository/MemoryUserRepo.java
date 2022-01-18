@@ -21,6 +21,11 @@ public class MemoryUserRepo implements UserRepository{
     }
 
     @Override
+    public User update(User user){
+        return user;
+    }
+
+    @Override
     public void delete(User user){
         users.remove(user.getUserNo());
     }

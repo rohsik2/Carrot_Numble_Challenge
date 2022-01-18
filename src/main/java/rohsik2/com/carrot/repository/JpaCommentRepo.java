@@ -1,5 +1,6 @@
 package rohsik2.com.carrot.repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.Comment;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class JpaCommentRepo implements CommentRepository{
 
     EntityManager em;
@@ -17,9 +19,14 @@ public class JpaCommentRepo implements CommentRepository{
     }
 
     @Override
-    public Comment register(Comment comment, Stuff stuff) {
-        comment.setStuff(stuff);
+    public Comment register(Comment comment) {
         em.persist(comment);
+        return comment;
+    }
+
+    @Override
+    public Comment update(Comment comment){
+        em.merge(comment);
         return comment;
     }
 
