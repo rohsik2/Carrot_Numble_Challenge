@@ -13,28 +13,20 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>email</th>
-                <th>이름</th>
-                <th>닉네임</th>
-                <th>폰번호</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="stuff : ${stuffs}">
-                <td th:text="${stuff.id}"></td>
-                <td th:text="${stuff.title}"></td>
-                <td th:text="${stuff.isDone}"></td>
-                <td th:text="${stuff.text}"></td>
-                <td th:text="${stuff.price}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row">
+
+        <div class="col s12 card" th:each="stuff : ${stuffs}">
+            <div class="card-content white-text">
+                <p th:text="${stuff.id}"></p>
+                <p th:text="${stuff.title}"></p>
+                <p th:text="${stuff.isDone}"></p>
+                <p th:text="${stuff.text}"></p>
+                <p th:text="${stuff.price}"></p>
+            </div>
+        </div>
     </div>
+
+
 </div> <!-- /container -->
 </body>
 </html>

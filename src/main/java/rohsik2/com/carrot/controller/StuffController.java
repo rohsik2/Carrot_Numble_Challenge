@@ -7,12 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
-import rohsik2.com.carrot.repository.JpaStuffRepo;
-import rohsik2.com.carrot.repository.MemoryStuffRepo;
 import rohsik2.com.carrot.repository.StuffRepository;
 import rohsik2.com.carrot.service.StuffService;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 
