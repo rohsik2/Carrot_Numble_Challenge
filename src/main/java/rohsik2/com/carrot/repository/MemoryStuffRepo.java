@@ -1,5 +1,6 @@
 package rohsik2.com.carrot.repository;
 
+import org.springframework.stereotype.Repository;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
 
@@ -13,28 +14,22 @@ public class MemoryStuffRepo implements StuffRepository {
 
     @Override
     public Stuff register(Stuff stuff, User user) {
-        stuff.setOwner(user);
         stuff.setStuffId(++seqNo);
         stuffs.put(seqNo, stuff);
-        user.getStuffs().add(stuff);
+        return stuff;
+    }
+
+    @Override
+    public Stuff update(Stuff stuff){
         return stuff;
     }
 
     @Override
     public void delete(Stuff stuff) {
         //TODO : have to make method in User for deleting Stuff for him.
-        stuff.getOwner().getStuffs().remove(stuff);
         stuffs.remove(stuff.getStuffId());
     }
 
-    @Override
-    public List<Stuff> findByUser(User user) {
-        return new ArrayList<Stuff>(
-            stuffs.values().stream()
-                    .filter(stuff -> stuff.getOwner().equals(user))
-                    .collect(Collectors.<Stuff>toList())
-        );
-    }
 
     @Override
     public List<Stuff> findByCategory(String category) {
@@ -59,5 +54,18 @@ public class MemoryStuffRepo implements StuffRepository {
         return stuffs.values().stream()
                 .filter(user -> user.getStuffId() == stuffId)
                 .findAny();
+    }
+
+    @Override
+    public List<Stuff> findByUserId(long ownerId){
+        return new ArrayList<Stuff>(
+                stuffs.values().stream()
+                        .filter(stuff -> stuff.getOwner().getUserNo() == ownerId)
+                        .collect(Collectors.<Stuff>toList())
+                );
+    }
+
+    public void clear(){
+        stuffs.clear();
     }
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col s8">
+            <p>"개발자님 동네"</p>
+        </div>
+        <div class="col s2">
+            <a th:href="@{/stuff/search(userToken=${userToken})}"><i width="100%" class="large material-icons">search</i></a>
+        </div>
+        <div class="col s2">
+            <a th:href="@{/stuff/category(userToken=${userToken})}"><i width="100%" class="large material-icons">reorder</i></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 card" th:each="stuff : ${stuffs}">
+            <div class="card-content">
+                <p th:text="${stuff.title}"></p>
+                <p th:text="${stuff.price}"></p>
+                <p th:text="${stuff.text}"></p>
+            </div>
+            <div class="card-action">
+                <a th:href="@{/stuff/detail(stuffId=${stuff.stuffId}, userToken=${userToken})}">더보기</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s4">
+            <a th:href="@{/stuff/stuffList(userToken=${userToken})}"><img src="/icons/home.png" width="80%"></a>
+        </div>
+        <div class="col s4">
+            <a th:href="@{/user/profile(userToken=${userToken})}"><img src="/icons/profile.png" width="80%"></a>
+        </div>
+        <div class="col s4">
+            <a th:href="@{/stuff/new(userToken=${userToken})}"><i class="large material-icons">add</i></a>
+        </div>
+
+    </div>
+
+
+</div> <!-- /container -->
+</body>
+</html>

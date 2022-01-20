@@ -1,17 +1,30 @@
 package rohsik2.com.carrot.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+import rohsik2.com.carrot.controller.StuffForm;
 
+import javax.persistence.*;
+import java.util.*;
+
+@Entity @Table(name = "stuff")
 public class Stuff {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long stuffId;
     private String title;
     private String text;
     private int isDone;
     private int numLike;
-
+    private int price;
     private String category;
-    private List<User> likeUsers;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date wroteDate;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "stuff")
+    private Set<Comment> comments = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_no")
     private User owner;
 
     public Stuff(){
@@ -19,16 +32,27 @@ public class Stuff {
         text = "";
         isDone = 0;
         numLike = 0;
-        likeUsers = new ArrayList<>();
+        price = 0;
+        category = "";
     }
-    public Stuff(String title, String text, int isDone, int numLike, String category) {
+
+    public Stuff(String title, String text, int isDone, int numLike, String category, int price) {
         this.title = title;
         this.text = text;
         this.isDone = isDone;
         this.numLike = numLike;
-        this.likeUsers = new ArrayList<>();
         this.category = category;
+        this.price = price;
 
+    }
+
+    public Stuff(StuffForm stuffForm){
+        this.title = stuffForm.getTitle();
+        this.text = stuffForm.getText();
+        this.isDone = 0;
+        this.numLike = 0;
+        this.category = stuffForm.getCategory();
+        this.price = stuffForm.getPrice();
     }
 
     public long getStuffId() {
@@ -71,12 +95,22 @@ public class Stuff {
         this.numLike = numLike;
     }
 
-    public List<User> getLikeUsers() {
-        return likeUsers;
+
+    public String getCategory() {
+        return category;
     }
 
-    public void setLikeUsers(List<User> likeUsers) {
-        this.likeUsers = likeUsers;
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public User getOwner() {
@@ -87,13 +121,19 @@ public class Stuff {
         this.owner = owner;
     }
 
-
-    public String getCategory() {
-        return category;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
+    public Date getWroteDate() {
+        return wroteDate;
+    }
+
+    public void setWroteDate(Date wroteDate) {
+        this.wroteDate = wroteDate;
+    }
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col s2">
+                <a href="javascript:history.back();">
+                    <i class="large material-icons">arrow_back</i>
+                </a>
+            </div>
+            <div class="col s2">
+                <a th:href="@{/stuff/stuffList(userToken=${userToken})}">
+                    <img width="100%" src="/icons/home.png">
+                </a>
+            </div>
+        </div>
+        <div class="col s12">
+            <p th:text="${user.nickname}">title</p>
+        </div>
+        <div class="col s12">
+            <a href="/user/edit">프로필수정</a>
+        </div>
+        <div class="col s12">
+            <a th:href="@{/stuff/stuffList(userToken=${userToken})}">판매내역</a>
+        </div>
+        <div class="col s12">
+            <a>관심목록</a>
+        </div>
+        <div class="col s12">
+            <div class="btn">로그아웃</div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

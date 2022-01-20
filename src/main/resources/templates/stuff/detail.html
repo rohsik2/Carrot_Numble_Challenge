@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col s2">
+            <a href="javascript:history.back();">
+                <i width="100%" class="large material-icons">arrow_back</i>
+            </a>
+        </div>
+        <div class="col s2">
+            <a th:href="@{/stuff/stuffList(userToken=${userToken})}">
+                <img width="100%" src="/icons/home.png">
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <img width="100%" src="/icons/camera.png">
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col s4">
+            <img width="100%" src="/icons/camera.png">
+        </div>
+        <!--
+        <div class="col s8">
+            <p>user.nickname</p>
+        </div>
+        -->
+    </div>
+    <div class="row">
+        <div class="col s6">
+            <p th:text="${stuff.title}">title</p>
+        </div>
+        <div class="col s6">
+            <p th:text="${stuff.price}">price</p>
+        </div>
+        <div class="col s6">
+            <p th:text="${stuff.category}">category</p>
+        </div>
+        <div class="col s6">
+            <!-- TODO : change to stuff pub date-->
+            <p th:text="${stuff.stuffId}">pubtime</p>
+        </div>
+
+        <div class="col s12">
+            <p th:text="${stuff.text}"></p>
+        </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col s10">
+            판매상품
+        </div>
+        <div class="col s2">
+            <button>모두 보기</button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col s6 card" th:each="stuff : ${ownerStuffs}">
+            <div class="card-content">
+                <p th:text="${stuff.title}"></p>
+                <p th:text="${stuff.price}"></p>
+            </div>
+            <div class="card-action">
+                <a th:href="@{/stuff/detail(stuffId=${stuff.stuffId}, userToken=${userToken})}">더보기</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s2">
+            <img width="100%" src="/icons/like_empty.png">
+        </div>
+        <div class="col s2">
+            <img width="100%" src="/icons/chat.png">
+        </div>
+        <div class="col s4">
+            <a th:href="@{/comment/commentList(stuffId=${stuff.stuffId}, userToken=${userToken})}">
+            댓글보기
+            </a>
+        </div>
+        <div class="col s4">
+            <a th:href="@{/comment/new(stuffId=${stuff.stuffId}, userToken=${userToken})}">
+            댓글남기기
+            </a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
