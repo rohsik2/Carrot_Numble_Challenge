@@ -5,6 +5,15 @@ public class StuffForm {
     private String category;
     private int price;
     private String text;
+    private String userToken;
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 
     public String getTitle() {
         return title;

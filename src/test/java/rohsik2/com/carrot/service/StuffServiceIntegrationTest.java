@@ -66,4 +66,5 @@ public class StuffServiceIntegrationTest {
         stuffService.delete(myStuff2.getStuffId());
         assertEquals(1, member.getStuffs().size());
     }
+
 }

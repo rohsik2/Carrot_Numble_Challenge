@@ -6,6 +6,7 @@ import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class JpaCommentRepo implements CommentRepository{
 
     @Override
     public Comment register(Comment comment) {
+        comment.setWroteDate(new Date());
         em.persist(comment);
         return comment;
     }
@@ -53,4 +55,6 @@ public class JpaCommentRepo implements CommentRepository{
     public Optional<Comment> findByCommentId(long commentId) {
         return Optional.ofNullable(em.find(Comment.class, commentId));
     }
+
+
 }

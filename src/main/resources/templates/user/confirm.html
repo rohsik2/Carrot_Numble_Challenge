@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
 <head>
+
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-
-
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -20,20 +15,11 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col s6 offset-s3">
-            <img src="/icons/Carrot.png" width="100%">
+        <div class = "col s12">
+            <p>입력하신 메일로 인증메일을 전송했습니다. 메일을 인증하고 Karrot 마켓을 시작해 보세요.</p>
         </div>
-        <div class="col s12 center">
-            <h6>당신 근처의 Karrot 마켓</h6>
-        </div>
-        <div class="col s12 center">
-            <p>이제 내 동내에서<br>간편하게 중고거래하자</p>
-        </div>
+        <a class="col 12 btn" href="/user/login">로그인 하러 가기</a>
     </div>
-    <div claa="row">
-        <a class="col s12 btn center" href="/user/new">시작하기</a>
-    </div>
-    <div class="col s12 center">이미 계정이 있나요? <a href="/user/login">로그인</a></div>
 </div>
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="js/materialize.min.js"></script>

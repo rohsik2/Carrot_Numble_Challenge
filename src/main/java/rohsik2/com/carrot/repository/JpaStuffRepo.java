@@ -1,14 +1,11 @@
 package rohsik2.com.carrot.repository;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import rohsik2.com.carrot.domain.Stuff;
 import rohsik2.com.carrot.domain.User;
 
 import javax.persistence.EntityManager;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Transactional
 public class JpaStuffRepo implements StuffRepository{
@@ -20,9 +17,9 @@ public class JpaStuffRepo implements StuffRepository{
 
     @Override
     public Stuff register(Stuff stuff, User user) {
-        stuff.setOwner(user);
-        user.getStuffs().add(stuff);
+        stuff.setWroteDate(new Date());
         em.persist(stuff);
+        user.getStuffs().add(stuff);
         em.merge(user);
         return stuff;
     }
@@ -48,14 +45,15 @@ public class JpaStuffRepo implements StuffRepository{
 
     @Override
     public List<Stuff> findByCategory(String category) {
-        return em.createQuery("select s from Stuff s", Stuff.class)
+        return em.createQuery("select s from Stuff s where s.category like :category", Stuff.class)
+                .setParameter("category", "%"+category+"%")
                 .getResultList();
     }
 
     @Override
     public List<Stuff> findByTitle(String title) {
-        return em.createQuery("select s from stuff s where s.title like :title", Stuff.class)
-                .setParameter("title", "*"+title+"*")
+        return em.createQuery("select s from Stuff s where s.title like :title", Stuff.class)
+                .setParameter("title", "%"+title+"%")
                 .getResultList();
     }
 

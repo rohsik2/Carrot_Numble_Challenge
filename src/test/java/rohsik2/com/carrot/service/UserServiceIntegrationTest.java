@@ -24,6 +24,8 @@ public class UserServiceIntegrationTest {
         //Then
         User findMember = userRepository.findByUserNo(saveId).get();
         assertEquals(member.getName(), findMember.getName());
+        findMember = userRepository.findByEmail("name@gmail.com").get();
+        assertEquals(member.getName(), findMember.getName());
     }
 
     @Test
@@ -33,5 +35,14 @@ public class UserServiceIntegrationTest {
         User member2 = new User("name1@gmail.com", "password123!!!", "name1","01012345688","nickname");
         IllegalStateException e = assertThrows(IllegalStateException.class,
                 () -> userService.join(member2));//예외가 발생해야 한다. assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+    }
+
+    @Test
+    public void 로그인(){
+        User member = new User("name@gmail.com", "password123!!!", "name","01012345678","nickname");
+        userService.join(member);
+        assertEquals(true,userService.isValidUser("name@gmail.com", "password123!!!"));
+        assertEquals(false,userService.isValidUser("name@gmail.com", "password!!"));
+
     }
 }

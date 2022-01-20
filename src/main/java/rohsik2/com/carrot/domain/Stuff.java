@@ -1,12 +1,10 @@
 package rohsik2.com.carrot.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import rohsik2.com.carrot.controller.StuffForm;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity @Table(name = "stuff")
 public class Stuff {
@@ -20,10 +18,13 @@ public class Stuff {
     private int price;
     private String category;
 
-    @OneToMany(mappedBy = "stuff")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date wroteDate;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "stuff")
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToOne @JoinColumn(name = "user_no")
+    @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_no")
     private User owner;
 
     public Stuff(){
@@ -31,6 +32,8 @@ public class Stuff {
         text = "";
         isDone = 0;
         numLike = 0;
+        price = 0;
+        category = "";
     }
 
     public Stuff(String title, String text, int isDone, int numLike, String category, int price) {
@@ -124,5 +127,13 @@ public class Stuff {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Date getWroteDate() {
+        return wroteDate;
+    }
+
+    public void setWroteDate(Date wroteDate) {
+        this.wroteDate = wroteDate;
     }
 }

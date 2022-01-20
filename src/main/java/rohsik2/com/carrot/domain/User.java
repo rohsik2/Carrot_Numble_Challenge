@@ -19,11 +19,10 @@ public class User {
     private String nickname;
     private String role = "ROLE_USER";
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},mappedBy = "owner")
     private Set<Stuff> stuffs = new HashSet<>();
 
-
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},mappedBy = "writer")
     private Set<Comment> comments = new HashSet<>();
     public User(){
         email = "";
@@ -109,4 +108,5 @@ public class User {
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
+
 }

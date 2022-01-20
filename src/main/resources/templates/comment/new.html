@@ -15,30 +15,26 @@
 <body>
 <div class="container">
     <div class="row">
-        <form action="/user/login" method="post" class="col s12">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input placeholder="abcdefg@karrot.com" name="email" id="email" type="text" class="validate">
-                    <label for="email">이메일(ID)</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input name="pw" id="pw" type="password" class="validate">
-                    <label for="pw">비밀번호(PW)</label>
-                </div>
-            </div>
-
-            <!--<a href="/stuff/stuffList" class="btn">login</a>-->
-
-            <button class="btn submit" type="submit">login</button>
-        </form>
-        <div class="row">
-            <div class="col s12 center">비밀번호를 잊어버리셨나요?</div>
-            <div class="col s12 center"><a href="">비밀번호 찾기</a>></div>
+        <div class="col s2">
+            <a th:href="@{/stuff/detail(stuffId=${stuffId}, userToken=${userToken})}">
+                <i class="large material-icons">arrow_back</i>
+            </a>
         </div>
+        <div class="col s10">
+            <p>댓글 남기기</p>
+        </div>
+        <form action="/comment/new" method="post">
+            <div class="form-group">
+                <div class="input-field col s12">
+                    <input  id="text" name="text" type="text" class="validate" placeholder="댓글을 남겨주세요. 언제 어디서 물건을 받을수 있는지 문의하시거나 제안해 보세요. (100자 이네)">
+                    <label for="text">물건명</label>
+                </div>
+                <input type="hidden" id="stuffId" name="stuffId" th:value="${stuffId}"/>
+                <input type="hidden" id="userToken" name="userToken" th:value="${userToken}"/>
+            </div>
+            <button type="submit" class="col 12" width="100%">작성완료</button>
+        </form>
     </div>
-
 </div>
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="js/materialize.min.js"></script>

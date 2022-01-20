@@ -9,10 +9,7 @@ import rohsik2.com.carrot.repository.JpaStuffRepo;
 import rohsik2.com.carrot.repository.StuffRepository;
 import rohsik2.com.carrot.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Transactional
 public class StuffService {
@@ -38,6 +35,7 @@ public class StuffService {
     }
 
     public void save(Stuff stuff, User user){
+        stuff.setOwner(user);
         stuffRepository.register(stuff, user);
     }
 
