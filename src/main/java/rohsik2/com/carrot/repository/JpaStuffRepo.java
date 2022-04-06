@@ -19,7 +19,6 @@ public class JpaStuffRepo implements StuffRepository{
     public Stuff register(Stuff stuff, User user) {
         stuff.setWroteDate(new Date());
         em.persist(stuff);
-        user.getStuffs().add(stuff);
         em.merge(user);
         return stuff;
     }

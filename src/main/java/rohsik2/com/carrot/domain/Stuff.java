@@ -1,5 +1,7 @@
 package rohsik2.com.carrot.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import rohsik2.com.carrot.controller.StuffForm;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity @Table(name = "stuff")
+@Getter @Setter
 public class Stuff {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,85 +58,7 @@ public class Stuff {
         this.price = stuffForm.getPrice();
     }
 
-    public long getStuffId() {
-        return stuffId;
-    }
-
-    public void setStuffId(long stuffId) {
-        this.stuffId = stuffId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getIsDone() {
-        return isDone;
-    }
-
-    public void setIsDone(int isDone) {
-        this.isDone = isDone;
-    }
-
-    public int getNumLike() {
-        return numLike;
-    }
-
-    public void setNumLike(int numLike) {
-        this.numLike = numLike;
-    }
-
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Date getWroteDate() {
-        return wroteDate;
-    }
-
-    public void setWroteDate(Date wroteDate) {
-        this.wroteDate = wroteDate;
+    public void setOwner(User user){
+        this.owner = user;
     }
 }

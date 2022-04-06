@@ -1,5 +1,7 @@
 package rohsik2.com.carrot.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import rohsik2.com.carrot.controller.CommentForm;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity @Table(name = "comment")
+@Getter @Setter
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,42 +39,4 @@ public class Comment {
         this.wroteDate = new Date();
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Date getWroteDate() {
-        return wroteDate;
-    }
-
-    public void setWroteDate(Date wroteDate) {
-        this.wroteDate = wroteDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Stuff getStuff() {
-        return stuff;
-    }
-
-    public void setStuff(Stuff stuff) {
-        this.stuff = stuff;
-    }
-
-    public User getWriter() {
-        return writer;
-    }
-
-    public void setWriter(User writer) {
-        this.writer = writer;
-    }
 }

@@ -29,7 +29,8 @@ public class UserService {
     public Long join(User user){
         validateDuplicateUser(user);//validate existing user
         userRepository.save(user);
-        return user.getUserNo();
+        long userNo = user.getUserNo();
+        return userNo;
     }
 
     private void validateDuplicateUser(User user) {
