@@ -21,10 +21,10 @@ public class Stuff {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date wroteDate;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "stuff")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "stuff")
     private Set<Comment> comments = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_no")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "user_no")
     private User owner;
 
     public Stuff(){

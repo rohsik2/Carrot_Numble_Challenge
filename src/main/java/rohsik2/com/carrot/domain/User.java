@@ -19,10 +19,10 @@ public class User {
     private String nickname;
     private String role = "ROLE_USER";
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},mappedBy = "owner")
+    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL},mappedBy = "owner")
     private Set<Stuff> stuffs = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL},mappedBy = "writer")
+    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.ALL},mappedBy = "writer")
     private Set<Comment> comments = new HashSet<>();
     public User(){
         email = "";

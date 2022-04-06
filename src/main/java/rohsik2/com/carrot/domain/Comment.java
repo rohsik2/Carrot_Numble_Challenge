@@ -11,10 +11,10 @@ public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "stuff_comments")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "stuff_comments")
     private Stuff stuff;
 
-    @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "user_comments")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "user_comments")
     private User writer;
     private String text;
 
