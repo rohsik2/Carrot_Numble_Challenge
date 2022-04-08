@@ -7,7 +7,7 @@ import rohsik2.com.carrot.domain.User;
 import javax.persistence.EntityManager;
 import java.util.*;
 
-@Transactional
+@Transactional(readOnly = true)
 public class JpaStuffRepo implements StuffRepository{
     private final EntityManager em;
 
@@ -15,7 +15,7 @@ public class JpaStuffRepo implements StuffRepository{
         this.em = em;
     }
 
-    @Override
+    @Override @Transactional
     public Stuff register(Stuff stuff, User user) {
         stuff.setWroteDate(new Date());
         em.persist(stuff);
@@ -23,13 +23,13 @@ public class JpaStuffRepo implements StuffRepository{
         return stuff;
     }
 
-    @Override
+    @Override @Transactional
     public Stuff update(Stuff stuff){
         em.merge(stuff);
         return stuff;
     }
 
-    @Override
+    @Override @Transactional
     public void delete(Stuff stuff) {
         stuff.getOwner().getStuffs().remove(stuff);
         em.remove(stuff);

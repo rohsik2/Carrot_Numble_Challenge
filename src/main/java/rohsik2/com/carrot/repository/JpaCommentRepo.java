@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+@Transactional(readOnly = true)
 public class JpaCommentRepo implements CommentRepository{
 
     EntityManager em;
@@ -19,20 +19,20 @@ public class JpaCommentRepo implements CommentRepository{
         this.em = em;
     }
 
-    @Override
+    @Override @Transactional
     public Comment register(Comment comment) {
         comment.setWroteDate(new Date());
         em.persist(comment);
         return comment;
     }
 
-    @Override
+    @Override @Transactional
     public Comment update(Comment comment){
         em.merge(comment);
         return comment;
     }
 
-    @Override
+    @Override @Transactional
     public void delete(Comment comment) {
         em.remove(comment);
     }
@@ -55,6 +55,5 @@ public class JpaCommentRepo implements CommentRepository{
     public Optional<Comment> findByCommentId(long commentId) {
         return Optional.ofNullable(em.find(Comment.class, commentId));
     }
-
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
+@Transactional(readOnly = true)
 public class JpaUserRepo implements UserRepository{
     EntityManager em;
     public JpaUserRepo(EntityManager em){
@@ -16,17 +16,20 @@ public class JpaUserRepo implements UserRepository{
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         em.persist(user);
         return user;
     }
     @Override
+    @Transactional
     public User update(User user){
         em.merge(user);
         return user;
     }
 
     @Override
+    @Transactional
     public void delete(User user){
         em.remove(user);
     }
@@ -64,6 +67,4 @@ public class JpaUserRepo implements UserRepository{
         return em.createQuery("select u from User u", User.class)
                 .getResultList();
     }
-
-
 }
