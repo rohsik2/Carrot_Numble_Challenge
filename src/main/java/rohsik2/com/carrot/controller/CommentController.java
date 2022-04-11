@@ -51,7 +51,7 @@ public class CommentController {
         model.addAttribute("stuff", stuffService.findByStuffId(stuffId).get());
         model.addAttribute("stuffId", stuffId);
         model.addAttribute("comments", commentService.getCommentsWithStuffId(stuffId));
-        return "/comment/commentList";
+        return "comment/commentList";
     }
 
     @GetMapping("/comment/new")
@@ -60,7 +60,7 @@ public class CommentController {
     {
         model.addAttribute("userToken", userToken);
         model.addAttribute("stuffId", stuffId);
-        return "/comment/new";
+        return "comment/new";
     }
 
     @PostMapping("/comment/new")

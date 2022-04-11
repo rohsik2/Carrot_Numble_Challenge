@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("/user/login")
     public String login(Model model){
-        return "/user/login";
+        return "user/login";
     }
 
     @PostMapping("/user/login")
@@ -42,7 +42,7 @@ public class UserController {
 
     @GetMapping("/user/new")
     public String register(Model model){
-        return "/user/new";
+        return "user/new";
     }
 
     @PostMapping("/user/new")
@@ -62,7 +62,7 @@ public class UserController {
         if(SpringConfig.tokenService.isValidToken(userToken)) {
             model.addAttribute("user", SpringConfig.tokenService.getUserByToken(userToken));
             model.addAttribute("userToken", userToken);
-            return "/user/profile";
+            return "user/profile";
         }
         else
             return "redirect:/user/login";
@@ -72,6 +72,6 @@ public class UserController {
     public String userList(Model model){
         List<User> users = userService.findUsers();
         model.addAttribute("users", users);
-        return "/user/userList";
+        return "user/userList";
     }
 }
