@@ -33,12 +33,12 @@ public class MemoryUserRepo implements UserRepository{
     @Override
     public boolean isDuplicate(User user){
         return !(
-                findByEmail(user.getEmail()).isEmpty() &&
-                findByNickname(user.getNickname()).isEmpty() &&
+                findByEmail(user.getEmail()).isPresent() &&
+                findByNickname(user.getNickname()).isPresent() &&
                 users.values().stream()
                         .filter(curUser -> curUser.getPhoneNumber()
                         .equals(user.getPhoneNumber())).findAny()
-                        .isEmpty()
+                        .isPresent()
                 );
     }
 

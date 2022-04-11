@@ -63,7 +63,7 @@ public class StuffController {
     @GetMapping("/stuff/detail")
     public String detail(@RequestParam("userToken") String userToken, @RequestParam("stuffId") long stuffId, Model model){
         Optional<Stuff> optionalStuff = stuffService.findByStuffId(stuffId);
-        if(!optionalStuff.isEmpty()) {
+        if(!optionalStuff.isPresent()) {
             Stuff stuff = optionalStuff.get();
             model.addAttribute("stuff", stuff);
             model.addAttribute("ownerStuffs", stuff.getOwner().getStuffs());

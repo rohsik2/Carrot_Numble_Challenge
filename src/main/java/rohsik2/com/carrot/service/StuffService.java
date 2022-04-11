@@ -28,7 +28,7 @@ public class StuffService {
         //TODO : Change to better code with optionalStuff
         Optional<Stuff> optionalStuff = stuffRepository.findByStuffId(stuffId);
         optionalStuff.orElseThrow(() -> new NoSuchElementException());
-        if(!optionalStuff.isEmpty()){
+        if(!optionalStuff.isPresent()){
             Stuff stuff = optionalStuff.get();
             stuffRepository.delete(stuff);
         }
